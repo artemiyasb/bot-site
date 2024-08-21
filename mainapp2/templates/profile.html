@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Имя Фамилия</title>
+
+    <meta name="description" content="Sakura - утилита ВКонтакте для автоматизации действий.">
+    <meta name="author" content="Sakura">
+
+	<meta property="og:site_name" content="sakura duty" /> 
+	<meta property="og:site" content="sakuraduty.ru" /> 
+	<meta property="og:title" content="Sakura"/> 
+	<meta property="og:description" content="Автоматизация профилей ВКонтакте." /> 
+	<meta property="og:image" content="" /> 
+	<meta property="og:url" content="https://vk.com/skr.community" /> 
+	<meta property="og:type" content="article" />
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.easing.min.js"></script>
+    <script src="/static/js/swiper.min.js"></script>
+    <script src="/static/js/jquery.magnific-popup.js"></script>
+    <script src="/static/js/validator.min.js"></script>
+    <script src="/static/js/scripts.js"></script>
+    <script src="/static/registration-date.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap&subset=latin-ext" rel="stylesheet">
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/fontawesome-all.css" rel="stylesheet">
+    <link href="/static/css/swiper.css" rel="stylesheet">
+	<link href="/static/css/magnific-popup.css" rel="stylesheet">
+    <link href="/static/css/styles.css" rel="stylesheet">
+	
+    <link rel="icon" href="/static/images/icon.svg">
+    <img class="avatar" src="{% if user.image %} {{ user.image.url }} {% else %} {% static 'images/logo.jpg' %} {% endif %}" alt="Аватарка">
+
+
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-image: url('/static/images/fon.jpg');
+        background-size: cover;
+        background-attachment: fixed;
+    }
+    .console {
+        position: fixed;
+        bottom: 20px;
+        right: 30px;
+        width: 700px;
+        height: 400px;
+        border-radius: 50px;
+        background-color: #000;
+        color: #fff;
+        padding: 10px;
+        box-sizing: border-box;
+        overflow-y: auto;
+    }
+
+    .console-display {
+        height: 85%;
+        font-family: Arial, sans-serif;
+        overflow-y: auto;
+    }
+
+    .console-input {
+        width: 680px;
+        padding: 10px;
+        border-radius: 50px;
+        box-sizing: border-box;
+        margin-top: 3px;
+        border: none;
+        font-family: Arial, sans-serif;
+        background-color: #333;
+        color: #fff;
+        outline: none;
+    }
+
+    .console-input::placeholder {
+        color: #aaa;
+    }
+
+    .avatar {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        position: absolute;
+        top: 18%;
+        left: 10%;
+        transform: translate(-50%, -50%); /* сдвигаем изображение на -50% относительно своего размера */
+    }
+
+    .avatar img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .custom-text2 {
+        font-family: 'Arial Black', sans-serif;
+        Background-color: #5f4dee;
+        font-size: 30px;
+        color: #333;
+        position: absolute;
+        top: 140px;
+        left: 300px;
+    }
+
+    .custom-text-status {
+        font-family: 'Arial', sans-serif;
+        font-size: 25px;
+        color: #333;
+        position: absolute;
+        top: 210px;
+        left: 300px;
+    }
+    .custom-text-status1 {
+        font-family: 'Arial', sans-serif;
+        Background-color: #5f4dee;
+        border-color: #5f4dee;
+        font-size: 25px;
+        color: #333;
+        position: absolute;
+        top: 85px;
+        left: 150px;
+    }
+    .custom-text-status2 {
+        font-family: 'Arial', sans-serif;
+        Background-color: #5f4dee;
+        border-color: #5f4dee;
+        font-size: 25px;
+        color: #333;
+        position: absolute;
+        top: 65px;
+        left: 150px;
+    }
+</style>
+<body data-spy="scroll" data-target=".fixed-top">
+    <div class="spinner-wrapper">
+        <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    <div class="container">
+
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#">Новости <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#">Помощь</a>
+                </li>
+
+   
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle page-scroll" href="#video" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">Sakura</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'settings' user.id %}"><span class="item-text">Настройки</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="#"><span class="item-text">FAQ</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="#"><span class="item-text">Обработка данных</span></a>
+                    </div>
+                </li>
+
+            <span class="nav-item">
+                <a class="btn-outline-sm" href="{% url 'logout' %}">Выйти</a>
+            </span>
+        </div>
+    </div> 
+</nav> 
+    <div class="console" id="console">
+        <div class="console-display" id="output"></div> <!-- надпись над консолью -->
+            <input type="text" class="console-input" placeholder="sakura@{username}: ~ #">
+    </div>
+        
+    <form action="{% url 'profile' user.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p class="custom-text-status1" for="{{ form.first_name.id_for_label }}">{{ form.first_name }}</p>
+        <p class="custom-text-status2" for="{{ form.last_name.id_for_label }}">{{ form.last_name }}</p>
+    </form>
+    <form action="{% url 'profile' user.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p class="custom-text-status" for="тут что нужно">Статус: {{ form.status }}</p>
+    </form>
+</div>
+</body>
+</html>
+
